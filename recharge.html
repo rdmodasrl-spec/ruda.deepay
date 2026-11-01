@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0c0d12" />
+    <title>DEEPAY 充值</title>
+    <style>
+      :root {
+        --bg: #0c0d12; --panel: rgba(255,255,255,0.04); --stroke: rgba(255,255,255,0.09); --text: #edf3fa; --muted: #9aa7b6; --soft: #dfe7f4;
+        --green: #2fcf8d; --amber: #f4b942; --red: #ff6b6b; --blue: #8fb4ff; --shadow: 0 18px 42px rgba(0,0,0,0.22);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; min-height:100%; background: var(--bg); color: var(--text); font-family: Inter, "Segoe UI", "PingFang SC", Arial, sans-serif; }
+      body { padding: 24px; }
+      .shell { max-width: 980px; margin: 0 auto; border:1px solid var(--stroke); border-radius:28px; overflow:hidden; background: linear-gradient(180deg, rgba(15,17,23,1), rgba(10,12,16,1)); box-shadow: var(--shadow); }
+      .topbar { display:flex; justify-content:space-between; align-items:center; padding:18px 26px; border-bottom:1px solid var(--stroke); background: rgba(255,255,255,0.02); }
+      .brand { display:flex; align-items:center; gap:10px; }
+      .brand-mark { width:34px; height:34px; border-radius:12px; display:grid; place-items:center; background: linear-gradient(135deg,#f7f9fc,#dfe7f4); color:#0d1117; font-weight:700; }
+      .brand-name { letter-spacing:0.08em; font-weight:700; }
+      .nav-right { display:flex; align-items:center; gap:12px; }
+      .chip { padding:8px 12px; border-radius:999px; border:1px solid rgba(47,207,141,0.24); background: rgba(47,207,141,0.08); color:#c7efd9; font-size:0.72rem; letter-spacing:0.06em; text-transform: uppercase; }
+      .avatar { width:38px; height:38px; border-radius:50%; display:grid; place-items:center; background: rgba(255,255,255,0.06); border:1px solid var(--stroke); font-weight:700; }
+      .content { padding: 28px; }
+      .panel { background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border:1px solid var(--stroke); border-radius:24px; }
+      .hero { padding: 24px 24px 20px; }
+      .section-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; }
+      .section-head h1 { margin:0; font-size: clamp(1.6rem, 3vw, 2.2rem); }
+      .label { color: var(--muted); font-size:0.72rem; text-transform: uppercase; letter-spacing:0.08em; }
+      .form-grid { display:grid; grid-template-columns: 1.1fr 0.9fr; gap:18px; }
+      .form-box { padding: 20px; }
+      .field { margin-bottom: 16px; }
+      .field label { display:block; margin-bottom:8px; font-size:0.82rem; color: var(--muted); }
+      .field input, .field select { width:100%; background: rgba(255,255,255,0.02); border:1px solid var(--stroke); border-radius:14px; color: var(--text); padding: 14px 14px; font-size:1rem; }
+      .amount-box { padding: 18px; border:1px solid var(--stroke); border-radius: 18px; background: rgba(255,255,255,0.02); }
+      .currency-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+      .amount { font-size: clamp(2rem, 4vw, 3rem); font-weight:700; letter-spacing:-0.06em; }
+      .network-list { display:grid; gap:12px; }
+      .network-item { display:flex; justify-content:space-between; align-items:center; padding: 12px 14px; border:1px solid var(--stroke); border-radius:14px; background: rgba(255,255,255,0.03); }
+      .network-item strong { display:block; }
+      .network-item small { color:var(--muted); }
+      .tag { display:inline-flex; align-items:center; padding:6px 10px; border-radius:999px; font-size:0.72rem; font-weight:600; }
+      .tag.ok { background: rgba(47,207,141,0.12); border:1px solid rgba(47,207,141,0.25); color:#caf4de; }
+      .tag.warn { background: rgba(244,185,66,0.12); border:1px solid rgba(244,185,66,0.25); color:#f7d98d; }
+      .actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:18px; }
+      .btn { border:none; border-radius: 14px; padding: 12px 18px; font-weight:700; cursor: pointer; }
+      .btn.primary { background:#edf3f9; color:#0d1117; }
+      .btn.secondary { background: rgba(255,255,255,0.04); border:1px solid var(--stroke); color: var(--text); }
+      .info-stack { display:grid; gap:12px; margin-top: 14px; }
+      .info-box { padding: 14px 14px; border:1px solid var(--stroke); border-radius:14px; background: rgba(255,255,255,0.03); }
+      .info-box strong { display:block; margin-bottom:6px; }
+      .info-box span { color: var(--muted); font-size:0.83rem; }
+      @media (max-width: 760px) {
+        body { padding: 12px; }
+        .topbar, .content { padding-left:16px; padding-right:16px; }
+        .form-grid { grid-template-columns:1fr; }
+      }
+    </style>
+    <link rel="stylesheet" href="/wallet.css?v=3" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark">D</div>
+          <div class="brand-name">DEEPAY</div>
+        </div>
+        <div class="nav-right">
+          <span class="chip">内部测试</span>
+          <div class="avatar">U</div>
+        </div>
+      </header>
+
+      <main class="content">
+        <section class="panel hero">
+          <div class="section-head">
+            <h1>充值</h1>
+            <a href="/" style="color: var(--soft); text-decoration:none; font-size:0.8rem;">返回首页</a>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-box">
+              <div class="field">
+                <label for="asset">资产</label>
+                <select id="asset" disabled>
+                  <option selected>未配置资产</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="network">网络</label>
+                <select id="network" disabled>
+                  <option selected>未配置网络</option>
+                </select>
+              </div>
+
+              <div class="amount-box">
+                <div class="currency-row">
+                  <span class="label">充值金额</span>
+                  <span class="tag warn">本阶段未开放</span>
+                </div>
+                <div class="amount">充值申请 API 尚未开发</div>
+              </div>
+
+              <div class="actions">
+                <button class="btn primary" type="button" data-wallet-action="create-deposit" disabled>生成充值地址</button>
+                <a class="btn secondary" href="/wallet-status.html?type=deposit">充值状态</a>
+              </div>
+            </div>
+
+            <aside class="form-box">
+              <div class="label" style="margin-bottom:10px;">可用网络</div>
+              <div class="network-list">
+                <div class="network-item">
+                  <div>
+                    <strong>链上充值</strong>
+                    <small>未配置托管地址和链上监测服务</small>
+                  </div>
+                  <span class="tag warn">未启用</span>
+                </div>
+                <div class="network-item">
+                  <div>
+                    <strong>法币充值</strong>
+                    <small>未接入支付渠道和订单回调</small>
+                  </div>
+                  <span class="tag warn">未启用</span>
+                </div>
+                <div class="network-item">
+                  <div>
+                    <strong>其他网络</strong>
+                    <small>网络配置和安全校验未完成</small>
+                  </div>
+                  <span class="tag warn">未启用</span>
+                </div>
+              </div>
+
+              <div class="info-stack">
+                <div class="info-box">
+                  <strong>充值地址</strong>
+                  <span>未配置；请勿向此钱包转入链上资产。</span>
+                </div>
+                <div class="info-box">
+                  <strong>确认规则</strong>
+                  <span>充值订单、支付确认和账本入账闭环尚未实现。</span>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="/wallet.js?v=3" defer></script>
+  </body>
+</html>

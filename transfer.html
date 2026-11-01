@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f5f6f7" />
+    <meta name="description" content="DEEPAY 钱包转账页面原型。" />
+    <title>转账 - DEEPAY Wallet</title>
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="stylesheet" href="/wallet.css?v=3" />
+    <style>
+      .form-shell { max-width: 860px; }
+      .page-header { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:22px; }
+      .page-header h1 { margin:0; font-size:26px; font-weight:600; }
+      .page-header p { margin:8px 0 0; color:var(--wallet-muted); font-size:14px; }
+      .form-grid { display:grid; grid-template-columns:1.2fr 0.8fr; gap:16px; }
+      .form-card, .info-card { padding:22px; }
+      .field { margin-bottom:16px; }
+      .field label { display:block; margin-bottom:8px; color:var(--wallet-muted); font-size:13px; }
+      .field input, .field select { width:100%; padding:0 12px; }
+      .supporting { color:var(--wallet-muted); font-size:13px; line-height:1.6; }
+      .form-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+      .disabled-action { opacity:0.5; cursor:not-allowed; }
+      .info-card h2 { margin:0 0 14px; font-size:16px; font-weight:600; }
+      .info-row { padding:12px 0; border-top:1px solid var(--wallet-border); }
+      .info-row strong { display:block; margin-bottom:5px; font-size:14px; font-weight:500; }
+      .info-row span { color:var(--wallet-muted); font-size:13px; line-height:1.5; }
+      @media(max-width:720px) {
+        .form-grid { grid-template-columns:1fr; }
+        .form-card, .info-card { padding:16px; }
+        .page-header h1 { font-size:22px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell form-shell">
+      <header class="topbar">
+        <div class="brand">
+          <img src="/logo.png" width="34" height="34" alt="DEEPAY" />
+          <span>DEEPAY</span>
+        </div>
+        <span class="wallet-status">转账 API 未连接</span>
+      </header>
+      <main class="content">
+        <div class="page-header">
+          <div>
+            <h1>转账</h1>
+            <p>转账必须经过服务端校验，并在同一账务事务中完成双方记账。</p>
+          </div>
+          <a class="action-btn" href="/">返回首页</a>
+        </div>
+        <div class="form-grid">
+          <section class="panel form-card" aria-label="转账信息">
+            <div class="field">
+              <label for="recipient">收款方钱包 ID</label>
+              <input id="recipient" autocomplete="off" placeholder="从对方钱包的收款页复制" disabled />
+            </div>
+            <div class="field">
+              <label for="asset">资产</label>
+              <select id="asset" disabled>
+                <option>等待资产服务</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="amount">转账金额</label>
+              <input id="amount" inputmode="decimal" placeholder="连接账本 API 后输入金额" disabled />
+            </div>
+            <p class="supporting">目前仅允许 TEST 环境内已启用 EUR 账户进行内部转账。提交后由服务端校验余额、幂等键并在同一账本事务中记账；不涉及链上转账。</p>
+            <div class="form-actions">
+              <button class="action-btn primary disabled-action" id="submitTransfer" type="button" disabled>连接钱包后转账</button>
+              <a class="action-btn" href="/wallet-transactions.html">查看交易记录</a>
+            </div>
+          </section>
+          <aside class="panel info-card">
+            <h2>转账保护</h2>
+            <div class="info-row">
+              <strong>双边记账</strong>
+              <span>服务端须保证付款方借记与收款方贷记在同一事务内完成。</span>
+            </div>
+            <div class="info-row">
+              <strong>幂等与审计</strong>
+              <span>提交需要唯一业务编号、幂等校验及可审计的交易状态。</span>
+            </div>
+            <div class="info-row">
+              <strong>当前状态</strong>
+              <span>只支持已启用的内部 TEST 资产；充值、提现和链上资产尚未开放。</span>
+            </div>
+          </aside>
+        </div>
+      </main>
+    </div>
+    <script src="/wallet.js?v=3" defer></script>
+  </body>
+</html>

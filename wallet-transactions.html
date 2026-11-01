@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f5f6f7" />
+    <meta name="description" content="DEEPAY 钱包交易记录页面原型。" />
+    <title>交易记录 - DEEPAY Wallet</title>
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="stylesheet" href="/wallet.css?v=3" />
+    <style>
+      .transactions-shell { max-width: 1000px; }
+      .page-header { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:22px; }
+      .page-header h1 { margin:0; font-size:26px; font-weight:600; }
+      .page-header p { margin:8px 0 0; color:var(--wallet-muted); font-size:14px; }
+      .panel { padding:22px; }
+      .filters { display:grid; grid-template-columns:1fr 1fr 1.3fr; gap:12px; margin-bottom:18px; }
+      .filters select, .filters input { width:100%; min-width:0; padding:0 12px; }
+      .table-wrap { overflow-x:auto; }
+      .table { width:100%; min-width:680px; }
+      .table th, .table td { padding:14px 10px; text-align:left; }
+      .prototype-label { margin-bottom:14px; }
+      @media(max-width:640px) {
+        .page-header { align-items:center; }
+        .page-header h1 { font-size:22px; }
+        .panel { padding:16px; }
+        .filters { grid-template-columns:1fr 1fr; }
+        .filters input { grid-column:1 / -1; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell transactions-shell">
+      <header class="topbar">
+        <div class="brand">
+          <img src="/logo.png" width="34" height="34" alt="DEEPAY" />
+          <span>DEEPAY</span>
+        </div>
+        <span class="wallet-status">交易 API 未连接</span>
+      </header>
+      <main class="content">
+        <div class="page-header">
+          <div>
+            <h1>交易记录</h1>
+            <p>按资产和交易类型查看钱包流水。</p>
+          </div>
+          <a class="action-btn" href="/">返回首页</a>
+        </div>
+        <section class="panel" aria-label="交易记录筛选和列表">
+          <div class="filters">
+            <select aria-label="交易类型" disabled>
+              <option>全部类型</option>
+            </select>
+            <select aria-label="资产" disabled>
+              <option>全部资产</option>
+            </select>
+            <input type="search" aria-label="搜索交易编号" placeholder="搜索交易编号" disabled />
+          </div>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>交易类型</th>
+                  <th>资产 / 网络</th>
+                  <th>金额</th>
+                  <th>状态</th>
+                  <th>时间</th>
+                  <th>交易编号</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="wallet-empty" colspan="6">连接钱包账本 API 后显示交易记录。</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="/wallet.js?v=3" defer></script>
+  </body>
+</html>

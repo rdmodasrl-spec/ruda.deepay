@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f5f6f7" />
+    <meta name="description" content="DEEPAY 钱包充值或提现状态页面原型。" />
+    <title>资金操作状态 - DEEPAY Wallet</title>
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="stylesheet" href="/wallet.css?v=3" />
+    <style>
+      .status-shell { max-width:860px; }
+      .page-header { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:22px; }
+      .page-header h1 { margin:0; font-size:26px; font-weight:600; }
+      .page-header p { margin:8px 0 0; color:var(--wallet-muted); font-size:14px; line-height:1.55; }
+      .status-card { padding:22px; }
+      .operation-status { display:flex; align-items:center; gap:12px; padding:16px; border:1px solid var(--wallet-border); border-radius:14px; background:var(--wallet-subtle); }
+      .operation-status strong { font-weight:600; }
+      .timeline { display:grid; gap:0; margin:22px 0 0; padding:0; list-style:none; }
+      .timeline li { position:relative; display:grid; grid-template-columns:24px minmax(0,1fr); gap:12px; min-height:74px; }
+      .timeline li:not(:last-child)::before { position:absolute; top:20px; bottom:0; left:9px; width:1px; background:var(--wallet-border); content:""; }
+      .timeline-marker { z-index:1; width:20px; height:20px; border:1px solid var(--wallet-border); border-radius:50%; background:#fff; }
+      .timeline-copy strong { display:block; margin-bottom:5px; font-size:14px; font-weight:500; }
+      .timeline-copy span { color:var(--wallet-muted); font-size:13px; line-height:1.5; }
+      .reference { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:12px; padding-top:18px; border-top:1px solid var(--wallet-border); }
+      .reference div { min-width:0; }
+      .reference dt { margin-bottom:6px; color:var(--wallet-muted); font-size:12px; }
+      .reference dd { margin:0; overflow-wrap:anywhere; font-size:14px; font-variant-numeric:tabular-nums; }
+      .actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+      @media(max-width:640px) {
+        .page-header h1 { font-size:22px; }
+        .status-card { padding:16px; }
+        .reference { grid-template-columns:1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell status-shell">
+      <header class="topbar">
+        <div class="brand">
+          <img src="/logo.png" width="34" height="34" alt="DEEPAY" />
+          <span>DEEPAY</span>
+        </div>
+        <span class="wallet-status">状态 API 未连接</span>
+      </header>
+      <main class="content" data-operation-status>
+        <div class="page-header">
+          <div>
+            <h1 data-status-title>操作状态</h1>
+            <p data-status-description>只有服务端返回的订单状态才是权威状态。当前没有可查询的资金操作记录。</p>
+          </div>
+          <a class="action-btn" href="/wallet-transactions.html">交易记录</a>
+        </div>
+        <section class="panel status-card" aria-label="操作进度">
+          <div class="operation-status" role="status">
+            <span class="wallet-status">尚无服务端状态</span>
+            <strong>钱包 API 未连接，无法确认是否存在订单或资金变化。</strong>
+          </div>
+          <ol class="timeline" data-status-timeline>
+            <li>
+              <span class="timeline-marker" aria-hidden="true"></span>
+              <div class="timeline-copy">
+                <strong>申请 / 订单创建</strong>
+                <span>需由授权钱包服务创建并返回业务编号。</span>
+              </div>
+            </li>
+            <li>
+              <span class="timeline-marker" aria-hidden="true"></span>
+              <div class="timeline-copy">
+                <strong>服务端确认</strong>
+                <span>当前未连接交易、风控或链上状态服务。</span>
+              </div>
+            </li>
+            <li>
+              <span class="timeline-marker" aria-hidden="true"></span>
+              <div class="timeline-copy">
+                <strong>账本处理</strong>
+                <span>只有服务端账务记录确认后才能显示入账或扣账结果。</span>
+              </div>
+            </li>
+          </ol>
+          <dl class="reference">
+            <div>
+              <dt>业务编号</dt>
+              <dd>—（没有服务端记录）</dd>
+            </div>
+            <div>
+              <dt>最后同步</dt>
+              <dd>—（状态 API 未连接）</dd>
+            </div>
+          </dl>
+          <div class="actions">
+            <a class="action-btn primary" href="/wallet-transactions.html">返回交易记录</a>
+            <a class="action-btn" href="/">返回钱包首页</a>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="/wallet.js?v=3" defer></script>
+  </body>
+</html>

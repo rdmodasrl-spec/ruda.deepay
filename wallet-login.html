@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f5f6f7" />
+    <meta name="description" content="DEEPAY 邀请制 TEST 钱包登录与注册。" />
+    <title>登录钱包 - DEEPAY</title>
+    <link rel="stylesheet" href="/wallet.css?v=3" />
+    <style>
+      .wallet-auth { width:min(480px, 100%); margin:7vh auto; }
+      .wallet-auth-card { padding:clamp(20px, 5vw, 32px); }
+      .wallet-auth-brand { display:flex; align-items:center; gap:10px; margin-bottom:28px; font-weight:700; letter-spacing:.06em; }
+      .wallet-auth-brand img { width:34px; height:34px; }
+      .wallet-auth h1 { margin:0; font-size:26px; font-weight:600; }
+      .wallet-auth p { color:var(--wallet-muted); font-size:14px; line-height:1.6; }
+      .wallet-auth-form { display:grid; gap:14px; margin-top:22px; }
+      .wallet-auth-form label { display:grid; gap:7px; color:var(--wallet-muted); font-size:13px; }
+      .wallet-auth-form input { width:100%; padding:0 12px; }
+      .wallet-auth-form button { width:100%; }
+      .wallet-auth-switch { display:flex; gap:12px; margin-top:16px; }
+      .wallet-auth-switch button { flex:1; }
+      [hidden] { display:none !important; }
+    </style>
+  </head>
+  <body>
+    <main class="wallet-auth">
+      <section class="panel wallet-auth-card">
+        <div class="wallet-auth-brand"><img src="/logo.png" alt="" />DEEPAY</div>
+        <h1>TEST 钱包</h1>
+        <p>仅限获得邀请的测试用户。此环境使用模拟 EUR 测试额度，不接受真实资金，也不提供链上充值或提现。</p>
+        <div class="wallet-auth-switch" aria-label="账户操作">
+          <button class="action-btn primary" type="button" data-auth-mode="login">登录</button>
+          <button class="action-btn" type="button" data-auth-mode="register">使用邀请注册</button>
+        </div>
+        <form class="wallet-auth-form" id="walletLoginForm">
+          <label>邮箱
+            <input name="email" type="email" autocomplete="username" maxlength="254" required />
+          </label>
+          <label>密码
+            <input name="password" type="password" autocomplete="current-password" maxlength="128" required />
+          </label>
+          <button class="action-btn primary" type="submit">登录</button>
+        </form>
+        <form class="wallet-auth-form" id="walletRegisterForm" hidden>
+          <label>邮箱
+            <input name="email" type="email" autocomplete="email" maxlength="254" required />
+          </label>
+          <label>密码（至少 12 个字符）
+            <input name="password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required />
+          </label>
+          <label>邀请代码
+            <input name="inviteCode" type="text" autocomplete="off" maxlength="128" required />
+          </label>
+          <button class="action-btn primary" type="submit">创建测试钱包</button>
+        </form>
+        <p class="wallet-auth-feedback" id="walletAuthFeedback" role="status" aria-live="polite"></p>
+      </section>
+    </main>
+    <script src="/wallet.js?v=3" defer></script>
+  </body>
+</html>

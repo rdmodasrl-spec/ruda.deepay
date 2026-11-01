@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f5f6f7" />
+    <title>DEEPAY 交易详情</title>
+    <style>
+      :root {
+        --bg: #0c0d12; --panel: rgba(255,255,255,0.04); --stroke: rgba(255,255,255,0.09); --text: #edf3fa; --muted:#9aa7b6; --soft:#dfe7f4; --green:#2fcf8d; --amber:#f4b942; --red:#ff6b6b; --shadow:0 18px 42px rgba(0,0,0,0.22);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; min-height:100%; background: var(--bg); color: var(--text); font-family: Inter, "Segoe UI", "PingFang SC", Arial, sans-serif; }
+      body { padding: 24px; }
+      .shell { max-width: 1080px; margin: 0 auto; border:1px solid var(--stroke); border-radius:28px; overflow:hidden; background: linear-gradient(180deg, rgba(15,17,23,1), rgba(10,12,16,1)); box-shadow: var(--shadow); }
+      .topbar { display:flex; justify-content:space-between; align-items:center; padding:18px 26px; border-bottom:1px solid var(--stroke); background: rgba(255,255,255,0.02); }
+      .brand { display:flex; align-items:center; gap:10px; }
+      .brand-mark { width:34px; height:34px; border-radius:12px; display:grid; place-items:center; background: linear-gradient(135deg,#f7f9fc,#dfe7f4); color:#0d1117; font-weight:700; }
+      .brand-name { letter-spacing:0.08em; font-weight:700; }
+      .nav-right { display:flex; align-items:center; gap:12px; }
+      .chip { padding:8px 12px; border-radius:999px; border:1px solid rgba(47,207,141,0.24); background: rgba(47,207,141,0.08); color:#c7efd9; font-size:0.72rem; letter-spacing:0.06em; text-transform: uppercase; }
+      .avatar { width:38px; height:38px; border-radius:50%; display:grid; place-items:center; background: rgba(255,255,255,0.06); border:1px solid var(--stroke); font-weight:700; }
+      .content { padding: 28px; }
+      .panel { background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border:1px solid var(--stroke); border-radius:24px; }
+      .hero { padding: 24px; }
+      .section-head { display:flex; justify-content:space-between; align-items:center;
+        margin-bottom:18px; }
+      .section-head h1 { margin:0; font-size: clamp(1.6rem, 3vw, 2.2rem); }
+      .amount-row { display:flex; align-items:baseline; gap:12px; margin-bottom: 12px; }
+      .amount { font-size: clamp(2rem, 4vw, 3.6rem); font-weight:700; letter-spacing:-0.06em; }
+      .label { color: var(--muted); font-size:0.72rem; letter-spacing:0.08em; text-transform: uppercase; }
+      .status { display:inline-flex; align-items:center; padding:6px 10px; border-radius:999px; font-size:0.72rem; font-weight:600; }
+      .status.ok { background: rgba(47,207,141,0.12); border:1px solid rgba(47,207,141,0.25); color:#caf4de; }
+      .status.warn { background: rgba(244,185,66,0.12); border:1px solid rgba(244,185,66,0.25); color:#f7d98d; }
+      .grid { display:grid; grid-template-columns: 1.1fr 0.9fr; gap:18px; }
+      .info-box { padding: 20px; }
+      .meta-list { display:grid; gap:12px; }
+      .meta-item { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--stroke); }
+      .meta-item.last { border-bottom:none; }
+      .meta-item span { color: var(--muted); }
+      .side-strip { display:grid; gap: 14px; }
+      .small-card { padding: 18px; }
+      .small-card strong { display:block; margin-bottom:6px; }
+      .small-card .value { color: var(--soft); font-size:1rem; word-break: break-all; }
+      .actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:18px; }
+      .btn { border:none; border-radius:14px; padding:12px 18px; font-weight:700; cursor:pointer; }
+      .btn.primary { background:#edf3f9; color:#0d1117; }
+      .btn.secondary { background: rgba(255,255,255,0.04); border:1px solid var(--stroke); color: var(--text); }
+      @media (max-width: 760px) { body { padding:12px; } .topbar, .content { padding-left:16px; padding-right:16px; } .grid { grid-template-columns:1fr; } }
+    </style>
+    <link rel="stylesheet" href="/wallet.css?v=3" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark">D</div>
+          <div class="brand-name">DEEPAY</div>
+        </div>
+        <div class="nav-right">
+          <span class="chip" data-transaction-status>等待账本数据</span>
+          <div class="avatar">U</div>
+        </div>
+      </header>
+
+      <main class="content">
+        <section class="panel hero">
+          <div class="section-head">
+            <h1>交易详情</h1>
+            <a href="/" style="color: var(--soft); text-decoration:none; font-size:0.8rem;">返回首页</a>
+          </div>
+
+          <div class="amount-row">
+            <div class="amount" data-transaction-amount>—</div>
+            <span class="status" data-transaction-direction>—</span>
+          </div>
+
+          <div class="label" style="margin-bottom:18px;" data-transaction-id>交易编号：—</div>
+
+          <div class="grid">
+            <div class="panel info-box">
+              <div class="meta-list">
+                <div class="meta-item"><span>交易类型</span><strong data-transaction-type>—</strong></div>
+                <div class="meta-item"><span>币种</span><strong data-transaction-asset>—</strong></div>
+                <div class="meta-item"><span>账务环境</span><strong>TEST</strong></div>
+                <div class="meta-item"><span>账本状态</span><strong data-transaction-ledger-status>等待服务端确认</strong></div>
+                <div class="meta-item last"><span>时间</span><strong data-transaction-time>—</strong></div>
+              </div>
+            </div>
+
+            <aside class="side-strip">
+              <div class="panel small-card">
+                <strong>对方钱包 ID</strong>
+                <div class="value" data-counterparty-wallet>不适用</div>
+              </div>
+              <div class="panel small-card">
+                <strong>交易类型</strong>
+                <div class="value" data-transaction-scope>等待服务端返回</div>
+              </div>
+              <div class="panel small-card">
+                <strong>数据范围</strong>
+                <div class="value">此详情只展示钱包账本返回的数据，不包含链上交易信息。</div>
+              </div>
+            </aside>
+          </div>
+
+          <div class="actions">
+            <button class="btn primary" type="button" data-wallet-action="share-receipt" disabled>复制交易编号</button>
+            <a class="btn secondary" href="/wallet-transactions.html">返回交易列表</a>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="/wallet.js?v=3" defer></script>
+  </body>
+</html>

@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#F5F6F7" />
+    <title>DEEPAY 代理端</title>
+    <style>
+      :root {
+        --bg: #0d1117;
+        --panel: rgba(255,255,255,0.04);
+        --stroke: rgba(255,255,255,0.08);
+        --text: #edf3f9;
+        --muted: #9aa7b6;
+        --soft: #d9e3ee;
+        --green: #2fcf8d;
+        --amber: #f4b942;
+        --red: #ff6b6b;
+        --purple: #9d8dff;
+        --shadow: 0 18px 40px rgba(0,0,0,0.2);
+      }
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0; min-height: 100%; background: var(--bg); color: var(--text);
+        font-family: Inter, "Segoe UI", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+      }
+      body { padding: 24px; }
+      .shell {
+        max-width: 1280px; margin: 0 auto; background: linear-gradient(180deg, rgba(17,22,29,0.98), rgba(12,17,23,0.97));
+        border: 1px solid var(--stroke); border-radius: 28px; box-shadow: var(--shadow); overflow: hidden;
+      }
+      .topbar {
+        display:flex; align-items:center; justify-content:space-between; padding: 22px 28px; border-bottom:1px solid var(--stroke);
+        background: rgba(255,255,255,0.015);
+      }
+      .brand { display:flex; align-items:center; gap:12px; font-weight:700; letter-spacing:0.08em; }
+      .brand-mark { width:36px; height:36px; border-radius:12px; display:grid; place-items:center; background: linear-gradient(135deg, #e2e8ff, #b4cbff); color:#0d1117; font-weight:700; }
+      .nav-right { display:flex; align-items:center; gap:12px; }
+      .chip { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background: rgba(157,141,255,0.12); border:1px solid rgba(157,141,255,0.3); color:#d9d1ff; font-size:0.72rem; text-transform: uppercase; letter-spacing:0.06em; }
+      .chip::before { content:""; width:8px; height:8px; border-radius:50%; background: var(--purple); }
+      .avatar { width:38px; height:38px; border-radius:50%; display:grid; place-items:center; background: rgba(255,255,255,0.06); border:1px solid var(--stroke); font-weight:700; }
+      .content { padding: 28px; }
+      .hero { display:grid; grid-template-columns: 1.5fr 0.9fr; gap:18px; margin-bottom:22px; }
+      .panel { background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015)); border:1px solid var(--stroke); border-radius:22px; }
+      .hero-main { padding: 24px 24px 20px; }
+      .label { color: var(--muted); font-size:0.75rem; letter-spacing:0.08em; text-transform: uppercase; }
+      .big-number { font-size: clamp(2.2rem, 4vw, 3.8rem); font-weight:700; letter-spacing: -0.06em; }
+      .meta { margin-top:10px; color: var(--muted); font-size:0.82rem; }
+      .stats-grid { display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap:16px; margin-bottom:22px; }
+      .card { padding: 18px 18px 14px; }
+      .card .k { color: var(--muted); font-size:0.74rem; letter-spacing:0.06em; text-transform: uppercase; }
+      .card .v { margin-top:10px; font-size:1.5rem; font-weight:700; }
+      .card .trend { margin-top:8px; font-size:0.8rem; }
+      .green { color: var(--green); }
+      .amber { color: var(--amber); }
+      .red { color: var(--red); }
+      .list-grid { display:grid; grid-template-columns: 1.3fr 1fr; gap:18px; }
+      .list-panel, .side-panel { padding: 22px; }
+      .section-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
+      .section-head h2 { margin:0; font-size:1.05rem; }
+      .link { color: var(--soft); text-decoration:none; font-size:0.8rem; }
+      .table { width:100%; border-collapse: collapse; }
+      .table th, .table td { text-align:left; padding: 13px 0; border-bottom:1px solid var(--stroke); }
+      .table th { color: var(--muted); font-weight:600; }
+      .tag { display:inline-flex; align-items:center; padding:6px 10px; border-radius:999px; font-size:0.72rem; font-weight:600; }
+      .tag.ok { background: rgba(47,207,141,0.12); border:1px solid rgba(47,207,141,0.25); color: #c7f2dc; }
+      .tag.warn { background: rgba(244,185,66,0.12); border:1px solid rgba(244,185,66,0.25); color: #f5d48d; }
+      .tag.info { background: rgba(157,141,255,0.12); border:1px solid rgba(157,141,255,0.22); color: #d9d1ff; }
+      .stack { display:grid; gap:14px; }
+      .mini { padding: 16px; border-radius: 16px; background: rgba(255,255,255,0.03); border:1px solid var(--stroke); }
+      .mini .k { color: var(--muted); font-size:0.72rem; text-transform: uppercase; letter-spacing: 0.06em; }
+      .mini .v { margin-top:10px; font-size: 1.25rem; font-weight:700; }
+      @media (max-width: 900px) {
+        .hero, .list-grid, .stats-grid { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 640px) {
+        body { padding: 12px; }
+        .topbar, .content { padding-left:16px; padding-right:16px; }
+        .topbar { flex-wrap: wrap; gap:12px; }
+      }
+    </style>
+    <link rel="stylesheet" href="wallet.css?v=4" />
+  </head>
+  <body class="portal-demo">
+    <div class="shell">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark">D</div>
+          <span>DEEPAY 代理端</span>
+        </div>
+        <div class="nav-right">
+          <span class="chip">演示数据</span>
+          <div class="avatar">A</div>
+        </div>
+      </header>
+
+      <main class="content">
+        <div class="wallet-notice" role="status">
+          <strong>演示数据</strong>
+          代理端尚未连接真实代理或佣金 API。页面中的佣金、商户和业绩信息均为静态示例，不代表实际可结算或可提现资金。
+        </div>
+        <section class="hero">
+          <div class="panel hero-main">
+            <div class="label">本月佣金</div>
+            <div style="display:flex; align-items:baseline; gap:10px; margin-top:12px;">
+              <span class="currency">EUR</span>
+              <span class="big-number">€26,480.20</span>
+            </div>
+            <div class="meta">已结算 13,640.00 • 待结算 12,840.20 • 下级商户 184 • 近 7 天新增 18 家</div>
+            <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:22px;">
+              <button class="btn primary" type="button" disabled title="代理 API 尚未接入">邀请商户</button>
+              <button class="btn secondary" type="button" disabled title="代理 API 尚未接入">佣金明细</button>
+            </div>
+          </div>
+
+          <div class="panel" style="padding: 22px;">
+            <div class="label">直播概览</div>
+            <div class="stack" style="margin-top: 16px;">
+              <div class="mini">
+                <div class="k">下级商户</div>
+                <div class="v">184</div>
+              </div>
+              <div class="mini">
+                <div class="k">最近转化</div>
+                <div class="v">+13.2%</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="stats-grid">
+          <div class="panel card">
+            <div class="k">累计佣金</div>
+            <div class="v">€138,500</div>
+            <div class="trend green">+22.8% vs last quarter</div>
+          </div>
+          <div class="panel card">
+            <div class="k">今日新增</div>
+            <div class="v">26</div>
+            <div class="trend green">+7.4% vs yesterday</div>
+          </div>
+          <div class="panel card">
+            <div class="k">待结算</div>
+            <div class="v">€12,840</div>
+            <div class="trend amber">预计 3 工作日到账</div>
+          </div>
+          <div class="panel card">
+            <div class="k">异常商户</div>
+            <div class="v">5</div>
+            <div class="trend red">1 需人工审核</div>
+          </div>
+        </section>
+
+        <section class="list-grid">
+          <div class="panel list-panel">
+            <div class="section-head">
+              <h2>下级商户表现</h2>
+              <span class="link" aria-disabled="true">未连接 API</span>
+            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>商户</th>
+                  <th>交易额</th>
+                  <th>佣金</th>
+                  <th>状态</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>East Market</td>
+                  <td>€18,400</td>
+                  <td>€2,760</td>
+                  <td><span class="tag ok">优</span></td>
+                </tr>
+                <tr>
+                  <td>Nova Retail</td>
+                  <td>€12,950</td>
+                  <td>€1,942</td>
+                  <td><span class="tag warn">正常</span></td>
+                </tr>
+                <tr>
+                  <td>RUD Trade</td>
+                  <td>€9,720</td>
+                  <td>€1,458</td>
+                  <td><span class="tag info">观察</span></td>
+                </tr>
+                <tr>
+                  <td>Crypto Hub</td>
+                  <td>€6,250</td>
+                  <td>€1,020</td>
+                  <td><span class="tag ok">优</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <aside class="panel side-panel">
+            <div class="section-head">
+              <h2>提成结构</h2>
+            </div>
+            <div class="stack">
+              <div class="mini">
+                <div class="k">一级分佣</div>
+                <div class="v">6.5%</div>
+              </div>
+              <div class="mini">
+                <div class="k">二级分佣</div>
+                <div class="v">2.5%</div>
+              </div>
+              <div class="mini">
+                <div class="k">本月目标</div>
+                <div class="v">€30,000</div>
+              </div>
+            </div>
+          </aside>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

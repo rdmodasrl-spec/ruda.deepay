@@ -1,11 +1,535 @@
-<!doctype html><html lang="zh"><head><script src="/_app.config.js?v=4.0.0-beta10-7362080d"></script><meta charset="UTF-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/><meta name="renderer" content="webkit"/><meta name="description" content="A Modern Back-end Management System"/><meta name="keywords" content="Vben Admin Vue3 Vite"/><meta name="author" content="Vben"/><meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0"/><title>Loading...</title><link id="favicon" rel="icon" href="/favicon.ico"/><script>// 生产环境下注入百度统计
-      if (window._VBEN_ADMIN_PRO_APP_CONF_) {
-        var _hmt = _hmt || [];
-        (function () {
-          var hm = document.createElement('script');
-          hm.src = 'https://hm.baidu.com/hm.js?b38e689f40558f20a9a686d7f6f33edf';
-          var s = document.getElementsByTagName('script')[0];
-          s.parentNode.insertBefore(hm, s);
-        })();
-      }</script><script type="module" crossorigin src="/jse/index-index-DPh1awOp.js"></script><link rel="modulepreload" crossorigin href="/js/rolldown-runtime-B0Z9INg1.js"><link rel="modulepreload" crossorigin href="/js/vue.runtime.esm-bundler-LlTrbNxZ.js"><link rel="modulepreload" crossorigin href="/js/objectSpread2-BmonrgTA.js"><link rel="modulepreload" crossorigin href="/js/dayjs.min-Dzju-wpX.js"><link rel="modulepreload" crossorigin href="/js/asyncToGenerator-BVcl5FgL.js"><link rel="modulepreload" crossorigin href="/js/defu-1oANYd5X.js"><link rel="modulepreload" crossorigin href="/js/utils-D5wrdLf1.js"><link rel="modulepreload" crossorigin href="/js/objectWithoutProperties-CjlH8YfO.js"><link rel="modulepreload" crossorigin href="/js/dist-BmQUUA8m.js"><link rel="modulepreload" crossorigin href="/js/preferences-CcQRAOkr.js"></head><body><script data-app-loading="inject-js">var theme = localStorage.getItem('daxpay-web-merchant-4.0.0-beta10-prod-preferences-theme');
-  document.documentElement.classList.toggle('dark', /dark/.test(theme));</script><style data-app-loading="inject-css">html{line-height:1.15}.loading{z-index:9999;background-color:#f4f7f9;flex-direction:column;justify-content:center;align-items:center;width:100%;height:100%;display:flex;position:fixed;top:0;left:0;overflow:hidden}.loading.hidden{pointer-events:none;visibility:hidden;opacity:0;transition:all .8s ease-out}.dark .loading{background:#0d0d10}.title{color:rgba(0,0,0,.85);margin-top:66px;font-size:28px;font-weight:600}.dark .title{color:#fff}.loader{width:48px;height:48px;position:relative}.loader:before{content:"";background:hsl(var(--primary,210 100% 50%) / 50%);border-radius:50%;width:48px;height:5px;animation:.5s linear infinite shadow-ani;position:absolute;top:60px;left:0}.loader:after{content:"";background:hsl(var(--primary,210 100% 50%));border-radius:4px;width:100%;height:100%;animation:.5s linear infinite jump-ani;position:absolute;top:0;left:0}@keyframes jump-ani{15%{border-bottom-right-radius:3px}25%{transform:translateY(9px) rotate(22.5deg)}50%{border-bottom-right-radius:40px;transform:translateY(18px) scaleY(.9) rotate(45deg)}75%{transform:translateY(9px) rotate(67.5deg)}to{transform:translateY(0) rotate(90deg)}}@keyframes shadow-ani{0%,to{transform:scale(1)}50%{transform:scaleX(1.2)}}</style><div class="loading" id="__app-loading__"><div class="loader"></div><div class="title">Loading...</div></div><div id="app"></div></body></html>
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f5f6f7" />
+    <meta name="description" content="DEEPAY 邀请制测试钱包。资产和账本数据由钱包 API 提供。" />
+    <title>DEEPAY Wallet</title>
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/logo.png" type="image/png" />
+    <style>
+      :root {
+        --bg: #0c0d12;
+        --bg-elevated: #121720;
+        --panel: rgba(255, 255, 255, 0.04);
+        --panel-strong: rgba(255, 255, 255, 0.08);
+        --stroke: rgba(255, 255, 255, 0.08);
+        --text: #f4f7fb;
+        --muted: #9ca7b6;
+        --soft: #dfe6f0;
+        --green: #28c76f;
+        --amber: #f5a623;
+        --red: #ff5b5b;
+        --shadow: 0 16px 48px rgba(0, 0, 0, 0.28);
+      }
+
+      * { box-sizing: border-box; }
+
+      html, body {
+        margin: 0;
+        min-height: 100%;
+        background: var(--bg);
+        color: var(--text);
+        font-family: Inter, "Segoe UI", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        padding: 24px;
+      }
+
+      .app-shell {
+        width: min(1200px, 100%);
+        min-height: calc(100vh - 48px);
+        border: 1px solid var(--stroke);
+        border-radius: 28px;
+        background: linear-gradient(180deg, rgba(13, 15, 21, 0.98), rgba(14, 16, 22, 0.98));
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 22px 32px 18px;
+        border-bottom: 1px solid var(--stroke);
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+
+      .brand img {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        display: block;
+      }
+
+      .brand span {
+        font-size: 1.05rem;
+      }
+
+      .topbar-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(40, 199, 111, 0.25);
+        background: rgba(40, 199, 111, 0.08);
+        color: #b9f4d0;
+        font-size: 0.75rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .pill::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--green);
+        display: inline-block;
+      }
+
+      .ghost-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        border: 1px solid var(--stroke);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--text);
+        font-size: 1.1rem;
+      }
+
+      .avatar {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.06));
+        border: 1px solid var(--stroke);
+        color: var(--soft);
+        font-weight: 700;
+        font-size: 0.8rem;
+      }
+
+      .content {
+        padding: 30px 32px 32px;
+      }
+
+      .panel {
+        background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+        border: 1px solid var(--stroke);
+        border-radius: 24px;
+      }
+
+      .hero {
+        padding: 28px 28px 20px;
+      }
+
+      .hero-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        color: var(--muted);
+        margin-bottom: 18px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.76rem;
+      }
+
+      .toggle-btn {
+        border: 1px solid var(--stroke);
+        background: transparent;
+        color: var(--soft);
+        border-radius: 999px;
+        padding: 8px 12px;
+        font-size: 0.72rem;
+        cursor: pointer;
+      }
+
+      .amount-row {
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+        margin-bottom: 8px;
+      }
+
+      .currency-tag {
+        font-size: 1rem;
+        color: var(--muted);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .total-amount {
+        font-size: clamp(2.5rem, 4vw, 4rem);
+        font-weight: 700;
+        letter-spacing: -0.06em;
+      }
+
+      .meta {
+        margin-bottom: 22px;
+        color: var(--muted);
+        font-size: 0.84rem;
+      }
+
+      .action-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .action-btn {
+        border: none;
+        border-radius: 14px;
+        padding: 12px 18px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.15s ease, opacity 0.15s ease;
+      }
+
+      .action-btn:hover { transform: translateY(-1px); }
+
+      .action-btn.primary {
+        background: #f3f5f7;
+        color: #10151d;
+      }
+
+      .action-btn.secondary {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--text);
+        border: 1px solid var(--stroke);
+      }
+
+      .asset-grid {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 24px;
+      }
+
+      .asset-card {
+        padding: 18px 18px 16px;
+        border-radius: 20px;
+        border: 1px solid var(--stroke);
+        background: rgba(255,255,255,0.02);
+      }
+
+      .asset-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 18px;
+      }
+
+      .asset-name {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 600;
+      }
+
+      .asset-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+
+      .asset-balance {
+        font-weight: 700;
+        font-size: 1.32rem;
+        letter-spacing: -0.04em;
+        margin-bottom: 6px;
+      }
+
+      .asset-change {
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      .green { color: var(--green); }
+      .red { color: var(--red); }
+      .amber { color: var(--amber); }
+
+      .bottom-grid {
+        display: grid;
+        grid-template-columns: 1.6fr 0.9fr;
+        gap: 22px;
+        margin-top: 24px;
+      }
+
+      .list-panel {
+        padding: 22px 22px 10px;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .section-head h2 {
+        margin: 0;
+        font-size: 1.05rem;
+      }
+
+      .link-btn {
+        color: var(--soft);
+        text-decoration: none;
+        font-size: 0.8rem;
+      }
+
+      .tx-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .tx-item {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 0;
+        border-top: 1px solid var(--stroke);
+      }
+
+      .tx-item:first-child { border-top: none; }
+
+      .tx-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+        background: rgba(255,255,255,0.04);
+      }
+      .tx-icon.in { background: rgba(40, 199, 111, 0.12); color: #a4f0bf; }
+      .tx-icon.out { background: rgba(255, 91, 91, 0.12); color: #ffb2b2; }
+      .tx-icon.transfer { background: rgba(245, 166, 35, 0.12); color: #f9d588; }
+
+      .tx-type {
+        font-weight: 600;
+      }
+
+      .tx-sub {
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      .tx-amount {
+        font-weight: 700;
+        text-align: right;
+      }
+
+      .tx-status {
+        display: block;
+        color: var(--muted);
+        font-size: 0.7rem;
+        letter-spacing: 0.04em;
+        margin-top: 4px;
+        text-transform: uppercase;
+      }
+
+      .security-panel {
+        padding: 22px;
+      }
+
+      .status-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin-top: 18px;
+      }
+
+      .status-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 14px;
+        border-radius: 14px;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--stroke);
+      }
+
+      .status-row strong {
+        font-size: 0.87rem;
+        font-weight: 600;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 0.72rem;
+        font-weight: 600;
+      }
+
+      .badge.ok { background: rgba(40, 199, 111, 0.12); color: #b9f4d0; }
+      .badge.warn { background: rgba(245, 166, 35, 0.12); color: #f9d588; }
+      .badge.info { background: rgba(255,255,255,0.08); color: var(--soft); }
+
+      @media (max-width: 980px) {
+        .asset-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .bottom-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 640px) {
+        body {
+          padding: 12px;
+        }
+
+        .app-shell {
+          min-height: calc(100vh - 24px);
+          border-radius: 20px;
+        }
+
+        .topbar,
+        .content {
+          padding-left: 18px;
+          padding-right: 18px;
+        }
+
+        .topbar {
+          padding-top: 18px;
+          padding-bottom: 16px;
+        }
+
+        .topbar-actions {
+          gap: 8px;
+        }
+
+        .pill {
+          display: none;
+        }
+
+        .asset-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .action-row {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .action-btn {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="/wallet.css?v=3" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand" aria-label="DEEPAY wallet home">
+          <img src="/logo.png" alt="DEEPAY logo" />
+          <span>DEEPAY</span>
+        </div>
+
+        <div class="topbar-actions">
+          <span class="pill">内部测试</span>
+          <a class="avatar" href="/wallet-login.html" aria-label="登录钱包">登录</a>
+        </div>
+      </header>
+
+      <main class="content">
+        <section class="panel hero" aria-label="总资产概览">
+          <div class="hero-head">
+            <span>EUR 可用余额（TEST）</span>
+            <button class="toggle-btn" type="button" id="toggleBalance" disabled>余额未连接</button>
+          </div>
+
+          <div class="amount-row">
+            <span class="currency-tag">EUR</span>
+            <span class="total-amount" id="totalAmount">—</span>
+          </div>
+          <div class="meta">仅显示服务端 TEST 环境 EUR 账本余额；未接入估值或行情。</div>
+
+          <div class="action-row" aria-label="常用操作">
+            <a href="/recharge.html" class="action-btn primary" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;">充值</a>
+            <a href="/transfer.html" class="action-btn secondary" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;">转账</a>
+            <a href="/receive.html" class="action-btn secondary" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;">收款</a>
+            <a href="/withdraw.html" class="action-btn secondary" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;">提现</a>
+          </div>
+        </section>
+
+        <section class="asset-grid" aria-label="资产分布" data-wallet-assets>
+          <div class="wallet-empty">登录并连接钱包 API 后显示账户资产。</div>
+        </section>
+
+        <section class="bottom-grid">
+          <div class="panel list-panel">
+            <div class="section-head">
+              <h2>最近交易</h2>
+              <a class="link-btn" href="/wallet-transactions.html">查看全部</a>
+            </div>
+
+            <ul class="tx-list">
+              <li class="wallet-empty">登录并连接钱包 API 后显示账本交易。</li>
+            </ul>
+          </div>
+
+          <aside class="panel security-panel" aria-label="安全状态">
+            <div class="section-head">
+              <h2>安全状态</h2>
+            </div>
+
+            <div class="status-stack">
+              <div class="status-row">
+                <strong>双重验证</strong>
+                <span class="badge info">未接入</span>
+              </div>
+              <div class="status-row">
+                <strong>风险监控</strong>
+                <span class="badge info">未接入</span>
+              </div>
+              <div class="status-row">
+                <strong>支付限额</strong>
+                <span class="badge info">未接入</span>
+              </div>
+              <div class="status-row">
+                <strong>设备状态</strong>
+                <span class="badge info">未接入</span>
+              </div>
+            </div>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <script src="/wallet.js?v=3" defer></script>
+  </body>
+</html>
