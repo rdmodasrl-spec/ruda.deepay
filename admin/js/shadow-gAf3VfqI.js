@@ -1,0 +1,1 @@
+function e(e){var t;return e==null||(t=e.getRootNode)==null?void 0:t.call(e)}function t(t){return typeof ShadowRoot>`u`?!1:e(t)instanceof ShadowRoot}function n(n){return t(n)?e(n):null}export{n as t};

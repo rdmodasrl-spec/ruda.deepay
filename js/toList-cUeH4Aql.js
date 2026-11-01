@@ -1,0 +1,1 @@
+function e(e,t=!1){return t&&e==null?[]:Array.isArray(e)?e:[e]}export{e as t};

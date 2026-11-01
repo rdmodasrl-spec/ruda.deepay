@@ -1,0 +1,1 @@
+import{r as e}from"./auth.api-Drs24ZcE.js";var t={findByChannelMchNo(t,n){return e.get({url:`/admin/wechat/transfer-config/find-by-channel-mch-no`,params:{mchNo:t,channelMchNo:n}})},save(t){return e.post({url:`/admin/wechat/transfer-config/save`,data:t})}};export{t};

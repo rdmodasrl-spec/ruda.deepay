@@ -1,0 +1,1 @@
+import{t as e}from"./payProviderDisplay-_A2wsLAZ.js";var t={BASIC:`basic`,SCENE:`scene`},n=[`aggregate_pay`,`wechat`,`alipay`,`union_pay`,`douyin`,`visa`,`mastercard`],r=e.filter(e=>n.includes(e.code));export{r as n,t};

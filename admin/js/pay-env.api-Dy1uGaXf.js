@@ -1,0 +1,1 @@
+import{r as e}from"./auth.api-Drs24ZcE.js";var t={sandboxEnabled(){return e.get({url:`/admin/pay-env/sandbox-enabled`})}};export{t};

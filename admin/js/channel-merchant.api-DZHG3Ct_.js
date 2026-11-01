@@ -1,0 +1,1 @@
+import{r as e}from"./auth.api-Drs24ZcE.js";var t={findByChannelMchNo(t){return e.get({url:`/admin/hkrt/isv-channel-merchant/find-by-channel-mch-no`,params:{channelMchNo:t}})},create(t){return e.post({url:`/admin/hkrt/isv-channel-merchant/create`,data:t})},updatePn(t,n){return e.post({url:`/admin/hkrt/isv-channel-merchant/update-pn`,params:{channelMchNo:t,pn:n}})}};export{t};

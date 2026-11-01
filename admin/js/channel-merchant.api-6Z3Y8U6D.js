@@ -1,0 +1,1 @@
+import{r as e}from"./auth.api-Drs24ZcE.js";var t={create(t){return e.post({url:`/admin/ums/direct-channel-merchant/create`,data:t})},findKeyConfig(t,n=!1){return e.get({url:`/admin/ums/direct-channel-merchant/find-key-config`,params:{channelMchNo:t,sandbox:n}})},saveKeyConfig(t){return e.post({url:`/admin/ums/direct-channel-merchant/save-key-config`,data:t})}};export{t};

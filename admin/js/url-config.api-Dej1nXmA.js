@@ -1,0 +1,1 @@
+import{r as e}from"./auth.api-Drs24ZcE.js";var t={get(){return e.get({url:`/platform/config/url/get`})},update(t){return e.post({url:`/platform/config/url/update`,data:t})},check(t){return e.post({url:`/platform/config/url/check`,data:t})}};export{t};

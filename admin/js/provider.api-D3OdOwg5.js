@@ -1,0 +1,1 @@
+import{r as e}from"./auth.api-Drs24ZcE.js";var t={listByProvider(){return e.get({url:`/admin/payment/pay-provider/list-by-provider`})},get(t,n){return e.get({url:`/admin/payment/pay-provider/get`,params:{provider:t,method:n}})}};export{t};

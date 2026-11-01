@@ -1,0 +1,1 @@
+import{r as e}from"./auth.api-DwAN2MQh.js";var t={page(t){return e.get({url:`/mch/alloc/page`,params:t})},getById(t){return e.get({url:`/mch/alloc/get-by-id`,params:{id:t}})},create(t){return e.post({url:`/mch/alloc/create`,data:t})},sync(t){return e.post({url:`/mch/alloc/sync`,params:{allocNo:t}})}};export{t};

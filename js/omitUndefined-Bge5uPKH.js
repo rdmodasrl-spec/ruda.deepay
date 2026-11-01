@@ -1,0 +1,1 @@
+function e(e,t=[]){let n={};for(let r in e){let i=e[r];i!==void 0&&!t.includes(r)&&(n[r]=i)}return n}export{e as t};

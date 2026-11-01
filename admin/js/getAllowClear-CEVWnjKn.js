@@ -1,0 +1,1 @@
+import{E as e,N as t}from"./vue.runtime.esm-bundler-D1keAQvE.js";import{t as n}from"./CloseCircleFilled-BLld3dgn.js";t();function r(t){let r;return typeof t==`object`&&t&&t.clearIcon?r=t:t&&(r={clearIcon:e(n,null,null)}),r}export{r as t};

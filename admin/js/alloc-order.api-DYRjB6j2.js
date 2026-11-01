@@ -1,0 +1,1 @@
+import{r as e}from"./auth.api-Drs24ZcE.js";var t={page(t){return e.get({url:`/admin/alloc/page`,params:t})},getById(t){return e.get({url:`/admin/alloc/get-by-id`,params:{id:t}})},create(t){return e.post({url:`/admin/alloc/create`,data:t})},sync(t){return e.post({url:`/admin/alloc/sync`,params:{allocNo:t}})}};export{t};

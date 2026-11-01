@@ -1,0 +1,1 @@
+import{r as e}from"./auth.api-Drs24ZcE.js";var t={genRsaKeyPair(){return e.post({url:`/key-gen/gen-rsa-key-pair`})},genAesSecretKey(){return e.post({url:`/key-gen/gen-aes-secret-key`})}};export{t};

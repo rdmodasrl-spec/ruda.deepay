@@ -1,0 +1,1 @@
+function e(e){return e!=null}function t(t){return e(t)&&t!==!1&&t!==``}function n(e){return typeof e==`number`&&!Number.isNaN(e)}function r(e){return typeof e==`object`&&!!e}export{t as i,n,r,e as t};

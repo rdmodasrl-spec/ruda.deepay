@@ -1,0 +1,1 @@
+import{r as e}from"./auth.api-Drs24ZcE.js";var t={check(t){return e.get({url:`/admin/product-binding-check/check`,params:{product:t}})}};export{t};

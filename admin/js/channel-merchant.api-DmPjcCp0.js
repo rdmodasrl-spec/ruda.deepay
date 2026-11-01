@@ -1,0 +1,1 @@
+import{r as e}from"./auth.api-Drs24ZcE.js";var t={create(t){return e.post({url:`/admin/easypay/channel-merchant/create`,data:t})}},n={findConfig(t){return e.get({url:`/admin/easypay/key-config/find-config`,params:{channelMchNo:t}})},saveConfig(t){return e.post({url:`/admin/easypay/key-config/save-config`,data:t})}};export{n,t};

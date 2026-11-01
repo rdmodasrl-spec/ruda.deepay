@@ -1,0 +1,1 @@
+import{N as e,v as t}from"./vue.runtime.esm-bundler-LlTrbNxZ.js";e();function n(e){return t(()=>`${e.value}-css-var`)}export{n as t};

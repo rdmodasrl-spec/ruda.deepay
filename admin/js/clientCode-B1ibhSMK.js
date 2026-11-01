@@ -1,0 +1,1 @@
+var e=function(e){return e.ADMIN=`admin`,e.GATEWAY=`gateway`,e.MERCHANT=`merchant`,e}({}),t={gateway:`cyan`,admin:`blue`,merchant:`purple`},n={gateway:`common.clientGateway`,admin:`common.clientAdmin`,merchant:`common.clientMerchant`};export{t as n,n as r,e as t};

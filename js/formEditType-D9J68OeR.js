@@ -1,0 +1,1 @@
+var e=function(e){return e[e.Add=0]=`Add`,e[e.Edit=1]=`Edit`,e[e.Show=2]=`Show`,e[e.Copy=3]=`Copy`,e}({});export{e as t};

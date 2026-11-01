@@ -1,0 +1,1 @@
+import{r as e}from"./auth.api-DwAN2MQh.js";var t={findRoleIdsByUser(t){return e.get({url:`/mch/user/role/find-role-ids-by-user`,params:{userId:t}})},findAssignableRolesByUser(t){return e.get({url:`/mch/user/role/find-assignable-roles-by-user`,params:{userId:t}})}};export{t};

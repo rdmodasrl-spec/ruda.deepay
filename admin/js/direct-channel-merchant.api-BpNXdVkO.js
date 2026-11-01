@@ -1,0 +1,1 @@
+import{r as e}from"./auth.api-Drs24ZcE.js";var t={findByChannelMchNo(t){return e.get({url:`/admin/fuyou/direct-channel-merchant/find-by-channel-mch-no`,params:{channelMchNo:t}})},create(t){return e.post({url:`/admin/fuyou/direct-channel-merchant/create`,data:t})}};export{t};

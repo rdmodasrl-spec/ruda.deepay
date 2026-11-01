@@ -1,0 +1,1 @@
+import{N as e,Y as t}from"./vue.runtime.esm-bundler-LlTrbNxZ.js";import"./useMergeSemantic-athmLM8U.js";e();function n(){}var r=n,i=Symbol(`WarningContext`);function a(e){t(i,e)}var o=()=>{let e=()=>{};return e.deprecated=n,e};export{a as n,r,o as t};

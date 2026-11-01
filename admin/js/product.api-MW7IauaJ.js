@@ -1,0 +1,1 @@
+import{r as e}from"./auth.api-Drs24ZcE.js";var t={page(t){return e.get({url:`/admin/product/page`,params:t})},findByCode(t){return e.get({url:`/admin/product/get`,params:{code:t}})},dropdown(){return e.get({url:`/admin/product/dropdown`})},listAll(){return e.get({url:`/admin/product/list-all`})}};export{t};

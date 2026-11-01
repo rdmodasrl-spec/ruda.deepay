@@ -1,0 +1,1 @@
+import{t as e}from"./use-tabs-ChEKml6R.js";function t(t){let{setTabTitle:n}=e();function r(e){e&&n(`${e} · ${t}`)}return{setTabObjectTitle:r}}export{t};

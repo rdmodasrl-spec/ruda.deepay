@@ -1,0 +1,1 @@
+var e=`--vben-content-height`,t=`--vben-content-width`,n=`--vben-header-height`,r=`--vben-footer-height`,i=`__vben_main_content`,a=`vben`,o=`https://github.com/vbenjs/vue-vben-admin`,s=`https://doc.vben.pro`,c=`https://www.vben.pro`;export{a,o as c,n as i,c as l,t as n,i as o,r,s,e as t};

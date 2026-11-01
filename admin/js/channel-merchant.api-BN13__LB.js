@@ -1,0 +1,1 @@
+import{r as e}from"./auth.api-Drs24ZcE.js";var t={create(t){return e.post({url:`/admin/adapay/direct-channel-merchant/create`,data:t})},findKeyConfig(t){return e.get({url:`/admin/adapay/direct-channel-merchant/find-key-config`,params:{channelMchNo:t}})},saveKeyConfig(t){return e.post({url:`/admin/adapay/direct-channel-merchant/save-key-config`,data:t})}};export{t};

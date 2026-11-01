@@ -1,0 +1,1 @@
+import{t as e}from"./objectSpread2-BmonrgTA.js";function t(t,n){let r=e({},t);return n.forEach(e=>{delete r[e]}),r}export{t};

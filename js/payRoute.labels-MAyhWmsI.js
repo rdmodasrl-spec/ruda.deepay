@@ -1,0 +1,1 @@
+import{t as e}from"./src-BtLYK3rX.js";import{t}from"./payRoute.constants-XPYYNtAR.js";function n(t){let n=`payment.merchant.route.route.providers.${t}`,r=e(n);return r===n?t:r}function r(n){return n===t.BASIC?e(`payment.merchant.route.route.modeBasic`):e(`payment.merchant.route.route.modeScene`)}function i(e){return e===t.BASIC?t.BASIC:t.SCENE}export{i as n,n as r,r as t};

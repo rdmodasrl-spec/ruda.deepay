@@ -1,0 +1,1 @@
+import{t as e}from"./src-BtLYK3rX.js";function t(t){if(!t)return`-`;let n=`dict.currency.${t.toLowerCase()}`,r=e(n);return r&&r!==n?r:t}export{t};

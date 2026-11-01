@@ -1,0 +1,1 @@
+import"./vue.runtime.esm-bundler-D1keAQvE.js";import"./useMergeSemantic-BvuUGo_D.js";import{n as e}from"./color-UlVWcOsg.js";function t(t,n){let{r,g:i,b:a,a:o}=t.toRgb(),s=new e(t.toRgbString()).onBackground(n).toHsv();return o<=.5?s.v>.5:r*.299+i*.587+a*.114>192}export{t};

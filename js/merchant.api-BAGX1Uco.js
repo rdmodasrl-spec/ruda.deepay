@@ -1,0 +1,1 @@
+import{r as e}from"./auth.api-DwAN2MQh.js";var t={get(){return e.get({url:`/mch/merchant/get`})},update(t){return e.post({url:`/mch/merchant/update`,data:t})}};export{t};
